@@ -81,25 +81,67 @@
   }
 
   header p {
-    font-family: var(--font-serif);
-    font-size: 18px;
-    letter-spacing: 0.05em;
+    font-family: "游ゴシック", "Yu Gothic", "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", sans-serif;
     color: #1A1A1A;
     background: rgba(255,255,255,0.35);
     border: 1px solid rgba(255,255,255,0.6);
-    width: 110px;
-    height: 110px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+  }
+
+  /* 1行目「PCサロン」：通常の太さ */
+  .header-line1 {
+    font-size: 19px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+
+  /* 2行目「Sola」：サイズを上げて主役として見せる（太字は使わない） */
+  .header-line2 {
+    font-size: 25px;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    margin-top: 2px;
   }
 
   /* ===== NEWS：日付＋タイトルだけの、最小限の一覧 ===== */
   .news {
     padding: 28px 24px;
     border-bottom: 1px solid var(--color-border-light);
+  }
+
+  /* ===== メニュー（ナビゲーション）：このサイトの「装飾を引く」方向性に合わせ、
+     背景色・枠・下線を一切使わず、文字とその間の余白だけで構成する =====
+  */
+  nav {
+    padding: 18px 24px 0;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    font-family: "游ゴシック", "Yu Gothic", "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    letter-spacing: 0.05em;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    color: var(--color-text-sub);
+  }
+
+  @media (max-width: 480px) {
+    nav { gap: 16px; padding: 16px 16px 0; }
   }
 
   .news h2 {
@@ -199,9 +241,17 @@
 
   <header>
     <div class="header-inner">
-      <p>○○塾</p>
+      <p><span class="header-line1">PCサロン</span><span class="header-line2">Sola</span></p>
     </div>
   </header>
+
+  <nav>
+    <a href="index.html">HOME</a>
+    <a href="courses.html">受講システム</a>
+    <a href="voices.html">声</a>
+    <a href="access.html">アクセス</a>
+    <a href="contact.html">お問い合わせ</a>
+  </nav>
 
   <section class="news">
     <h2>NEWS</h2>
