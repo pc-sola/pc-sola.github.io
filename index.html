@@ -3,224 +3,193 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>○○塾 - 知ることの喜びを、もう一度</title>
+<title>○○塾</title>
 <style>
+  /*
+    本物の画像に差し替える手順:
+
+    1. このindex.htmlと同じ場所に images というフォルダを作り、
+       写真ファイル（教室の風景、本の表紙の写真など）を入れてください。
+
+    2. header の background-image の値を、
+       url('images/header-photo.jpg') のように書き換えてください。
+
+    3. 各 article の中の <img src="data:image/svg+xml,...(長い文字列)..."> を、
+       <img src="images/book01.jpg"> のように、短いファイル名に書き換えてください。
+       alt="..." の文章（画像が何を表すかの説明）は、SEOのためそのまま残すか、
+       実際の内容に合わせて書き直してください。
+  */
   :root {
-    --color-blue-deep: #042C53;
-    --color-blue-strong: #185FA5;
-    --color-blue-mid: #378ADD;
-    --color-blue-light: #B5D4F4;
-    --color-blue-pale: #E6F1FB;
-    --color-bg-cafe: #FAF7F0;
-    --color-bg-cafe-2: #F3EDE2;
-    --color-text-main: #444441;
-    --color-text-sub: #5F5E5A;
-    --color-text-hint: #888780;
-    --color-border: #D3D1C7;
-    --font-serif: "游明朝", "Yu Mincho", "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", serif;
-    --font-sans: "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+    --color-text: #1A1A1A;
+    --color-text-sub: #6B6B6B;
+    --color-border: #1A1A1A;
+    --color-border-light: #D8D8D8;
+    --font-serif: "游明朝", "Yu Mincho", "ヒラギノ明朝 ProN", serif;
+    --font-sans: "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     font-family: var(--font-sans);
-    color: var(--color-text-main);
-    background: var(--color-bg-cafe);
+    color: var(--color-text);
+    background: #FFFFFF;
     line-height: 1.8;
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .page {
-    max-width: 720px;
+    max-width: 760px;
     margin: 0 auto;
-    background: var(--color-bg-cafe);
-    box-shadow: 0 0 24px rgba(0,0,0,0.04);
+    padding: 0 24px;
   }
 
-  section {
-    padding: 56px 32px;
-  }
-
-  .eyebrow {
-    font-size: 13px;
-    color: var(--color-text-sub);
-    letter-spacing: 0.08em;
-    margin-bottom: 10px;
-  }
-
-  h2 {
-    font-family: var(--font-serif);
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--color-blue-deep);
-    margin-bottom: 22px;
-  }
-
-  p { font-size: 15px; }
-
-  /* ヒーロー */
-  .hero {
-    background: var(--color-blue-pale);
-    text-align: center;
-    padding: 64px 32px 80px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .balloon {
+  /* header内の文字を、画像の上に「自由な位置」で重ねて置くための箱
+     position: absolute を使うことで、Wordのテキストボックスのように、
+     画像とは別レイヤーの、自由な座標で配置できる。
+     top/left の数値を変えるだけで、置く場所を自由に調整できる。 */
+  .header-inner {
     position: absolute;
-    width: 36px;
-    height: 44px;
+    top: 32px;
+    left: 32px;
   }
-  .balloon svg { width: 100%; height: 100%; }
-  .balloon-1 { top: 28px; left: 28px; transform: rotate(-8deg); }
-  .balloon-2 { top: 70px; right: 40px; width: 26px; height: 32px; transform: rotate(10deg); }
 
-  .hero .eyebrow {
+  /* ===== ヘッダー：太田市サイトの左上ロゴ部分に相当 =====
+     背景画像は、下記のbackground-imageの値を、実際の写真ファイルのパスに
+     置き換えるだけで差し替えられます。例: url('images/header-photo.jpg')
+     今は写真がないため、代わりに色のグラデーションで「画像の位置」を示しています。
+  */
+  header {
+    position: relative;
+    height: 360px;
+    border-bottom: 2px solid var(--color-border);
+    background-image: url('images/header-photo-web.jpg');
+    background-size: cover;
+    background-position: center;
+
+    /* ===== full-bleed（画面端まで広げる）テクニック =====
+       .page という親の箱は max-width: 760px; margin: 0 auto; で
+       中央に制限されているため、その内側にある header も、本来は
+       同じ760pxの幅に閉じ込められてしまう。
+       これを破るために、headerの幅をいったん「画面の幅(100vw)」まで
+       強制的に広げ、左右の位置を、ビューポート(画面)の中心に
+       合わせ直す、という3行のセットがこのテクニックの本体。
+    */
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+
+  header p {
     font-family: var(--font-serif);
-    color: var(--color-blue-strong);
-    font-size: 14px;
-  }
-
-  .hero h1 {
-    font-family: var(--font-serif);
-    font-size: 32px;
-    font-weight: 500;
-    color: var(--color-blue-deep);
-    margin: 8px 0 20px;
-  }
-
-  .hero .lead {
-    color: var(--color-text-sub);
-    max-width: 420px;
-    margin: 0 auto;
-  }
-
-  /* 教室の意義 */
-  .significance { background: var(--color-bg-cafe); }
-
-  /* 料金 */
-  .pricing { background: var(--color-bg-cafe-2); }
-
-  .price-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-  }
-
-  .price-card {
-    background: #FFFFFF;
-    border: 0.5px solid var(--color-border);
-    border-radius: 10px;
-    padding: 20px 14px;
-    text-align: center;
-  }
-
-  .price-card.featured {
-    border: 2px solid var(--color-blue-mid);
-  }
-
-  .badge {
-    display: inline-block;
-    font-size: 11px;
-    background: var(--color-blue-pale);
-    color: var(--color-blue-strong);
-    padding: 2px 10px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-  }
-
-  .price-card .course-name {
-    font-size: 13px;
-    color: var(--color-text-sub);
-    margin-bottom: 8px;
-  }
-
-  .price-card .price {
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--color-blue-strong);
-  }
-
-  /* 受講者の声 */
-  .voices { background: var(--color-bg-cafe); }
-
-  .voice-card {
-    background: #FFFFFF;
-    border: 0.5px solid var(--color-border);
-    border-radius: 10px;
-    padding: 18px 20px;
-    margin-bottom: 14px;
-  }
-
-  .voice-card p.quote {
-    font-style: italic;
-    margin-bottom: 8px;
-  }
-
-  .voice-card .who {
-    font-size: 13px;
-    color: var(--color-text-hint);
-  }
-
-  /* メッセージ（更新エリア） */
-  .message-section { background: var(--color-blue-pale); }
-
-  .message-eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--color-blue-strong);
-    font-size: 13px;
+    font-size: 18px;
     letter-spacing: 0.05em;
-    margin-bottom: 6px;
-  }
-
-  .message-date {
-    font-size: 13px;
-    color: var(--color-text-sub);
-    margin-bottom: 14px;
-  }
-
-  .message-box {
-    background: #FFFFFF;
-    border: 0.5px solid var(--color-blue-light);
-    border-radius: 10px;
-    padding: 20px 22px;
-  }
-
-  .message-box p {
-    color: var(--color-blue-deep);
-    margin: 0;
-  }
-
-  /* アクセス */
-  .access { background: var(--color-bg-cafe); }
-
-  .map-placeholder {
-    background: var(--color-border);
-    border-radius: 10px;
-    height: 140px;
+    color: #1A1A1A;
+    background: rgba(255,255,255,0.35);
+    border: 1px solid rgba(255,255,255,0.6);
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-text-sub);
-    margin-bottom: 14px;
-    font-size: 14px;
-  }
-
-  footer {
     text-align: center;
-    padding: 28px;
-    font-size: 13px;
-    color: var(--color-text-hint);
-    background: var(--color-bg-cafe-2);
   }
 
-  @media (max-width: 480px) {
-    section { padding: 40px 22px; }
-    .price-grid { grid-template-columns: 1fr; }
+  /* ===== NEWS：日付＋タイトルだけの、最小限の一覧 ===== */
+  .news {
+    padding: 28px 24px;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .news h2 {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    margin-bottom: 14px;
+    color: var(--color-text-sub);
+  }
+
+  .news ul {
+    list-style: none;
+  }
+
+  .news li {
+    font-size: 14px;
+    padding: 6px 0;
+    display: flex;
+    gap: 16px;
+  }
+
+  .news li span {
+    color: var(--color-text-sub);
+    font-family: var(--font-sans);
+    min-width: 90px;
+  }
+
+  /* ===== カード一覧：画像＋ラベル＋タイトル＋日付＋短文 ===== */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    padding: 0 24px;
+  }
+
+  .card {
+    padding: 28px 16px;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  /* 3列グリッドに、縦の区切り線を1本だけ引く（罫線のみで区切る、太田市サイトの特徴） */
+  .card:not(:nth-child(3n)) {
+    border-right: 1px solid var(--color-border-light);
+  }
+
+  .card .tag {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: #FFFFFF;
+    background: var(--color-text);
+    padding: 2px 8px;
+    margin-bottom: 12px;
+  }
+
+  /* ===== カード内の画像
+     src="..." の値を、実際の本の表紙写真のパスに置き換えるだけで差し替えられます。
+     例: src="images/book01.jpg"
+     今は写真がないため、本の表紙らしい縦長の比率(2:3)で、色だけのプレースホルダーにしています。
+  */
+  .card img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  .card h3 {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .card .date {
+    font-size: 12px;
+    color: var(--color-text-sub);
+    margin-bottom: 10px;
+  }
+
+  .card .desc {
+    font-size: 13px;
+    color: var(--color-text-sub);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 600px) {
+    .cards { grid-template-columns: 1fr; }
+    .card:not(:nth-child(3n)) { border-right: none; }
   }
 </style>
 </head>
@@ -228,100 +197,48 @@
 
 <div class="page">
 
-  <!-- ヒーロー -->
-  <section class="hero">
-    <div class="balloon balloon-1">
-      <svg viewBox="0 0 36 44"><ellipse cx="18" cy="18" rx="16" ry="18" fill="#85B7EB"/><line x1="18" y1="36" x2="18" y2="44" stroke="#5F5E5A" stroke-width="1"/></svg>
+  <header>
+    <div class="header-inner">
+      <p>○○塾</p>
     </div>
-    <div class="balloon balloon-2">
-      <svg viewBox="0 0 26 32"><ellipse cx="13" cy="13" rx="11" ry="13" fill="#B5D4F4"/><line x1="13" y1="26" x2="13" y2="32" stroke="#5F5E5A" stroke-width="1"/></svg>
-    </div>
-    <p class="eyebrow">いつからでも、学びはじまる</p>
-    <h1>○○塾</h1>
-    <p class="lead">知ることの喜びを、もう一度。<br>同じ時を生きる仲間と、ゆっくり学ぶ場所です。</p>
+  </header>
+
+  <section class="news">
+    <h2>NEWS</h2>
+    <ul>
+      <li><span>2026.06.16</span> 7月の特別講座の募集を開始しました</li>
+      <li><span>2026.06.04</span> 新着本のお知らせ</li>
+      <li><span>2026.05.20</span> 臨時休講のお知らせ</li>
+    </ul>
   </section>
 
-  <!-- 教室の意義 -->
-  <section class="significance">
-    <p class="eyebrow">教室の意義</p>
-    <h2>なぜ、いま学ぶのか</h2>
-    <p>定年も子育ても終え、自分の時間を取り戻したいま。知的な好奇心を持ち続けることは、人生をより深く、より豊かにします。当塾は、知識を得ることそのものを目的とした、大人のための学びの場です。</p>
-  </section>
+  <section class="cards">
+    <article class="card">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23B5A06E'/%3E%3Ctext x='100' y='160' font-size='16' fill='%23ffffff' text-anchor='middle'%3E武士の家計簿%3C/text%3E%3C/svg%3E" alt="武士の家計簿の表紙">
+      <p class="tag">BOOK</p>
+      <h3>武士の家計簿</h3>
+      <p class="date">磯田道史 / 新潮新書</p>
+      <p class="desc">幕末の加賀藩士の家計簿から、武士の実像を読み解く一冊。</p>
+    </article>
 
-  <!-- 料金体系 -->
-  <section class="pricing">
-    <p class="eyebrow">料金体系</p>
-    <h2>コースと月会費</h2>
-    <div class="price-grid">
-      <div class="price-card">
-        <p class="course-name">月2回コース</p>
-        <p class="price">¥6,000</p>
-      </div>
-      <div class="price-card featured">
-        <span class="badge">人気</span>
-        <p class="course-name">月4回コース</p>
-        <p class="price">¥10,000</p>
-      </div>
-      <div class="price-card">
-        <p class="course-name">個別指導</p>
-        <p class="price">¥15,000</p>
-      </div>
-    </div>
-  </section>
+    <article class="card">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%236B6358'/%3E%3Ctext x='100' y='160' font-size='16' fill='%23ffffff' text-anchor='middle'%3E応仁の乱%3C/text%3E%3C/svg%3E" alt="応仁の乱の表紙">
+      <p class="tag">BOOK</p>
+      <h3>応仁の乱</h3>
+      <p class="date">呉座勇一 / 中公新書</p>
+      <p class="desc">なぜ戦乱は10年も続いたのか。日本史の転換点を追う。</p>
+    </article>
 
-  <!-- 受講者の声 -->
-  <section class="voices">
-    <p class="eyebrow">受講者の声</p>
-    <h2>通われている方の言葉</h2>
-    <div class="voice-card">
-      <p class="quote">「何十年ぶりかで歴史を学び直し、新しい視点に出会えました。」</p>
-      <p class="who">70代・男性</p>
-    </div>
-    <div class="voice-card">
-      <p class="quote">「先生のお話が深く、毎回終わるのが惜しいくらいです。」</p>
-      <p class="who">60代・女性</p>
-    </div>
+    <article class="card">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23355478'/%3E%3Ctext x='100' y='160' font-size='16' fill='%23ffffff' text-anchor='middle'%3E和光同塵%3C/text%3E%3C/svg%3E" alt="和光同塵という生き方のイメージ">
+      <p class="tag">ESSAY</p>
+      <h3>和光同塵という生き方</h3>
+      <p class="date">2026.06.16</p>
+      <p class="desc">才を隠し、世俗に交わる。老子の言葉から考える。</p>
+    </article>
   </section>
-
-  <!-- 教室からのメッセージ（content.jsonから読み込み） -->
-  <section class="message-section">
-    <p class="message-eyebrow">教室からのメッセージ</p>
-    <p class="message-date" id="message-date">読み込み中...</p>
-    <div class="message-box">
-      <p id="message-body">読み込み中...</p>
-    </div>
-  </section>
-
-  <!-- アクセス -->
-  <section class="access">
-    <p class="eyebrow">アクセス</p>
-    <h2>教室の場所</h2>
-    <div class="map-placeholder">地図（後で埋め込み）</div>
-    <p>広島県広島市○○区○○町1-2-3<br>最寄り：○○駅より徒歩5分</p>
-  </section>
-
-  <footer>
-    &copy; 2026 ○○塾
-  </footer>
 
 </div>
-
-<script>
-  // content.json を読み込んで「教室からのメッセージ」だけ動的に差し替える
-  // これにより、コードを編集せずに content.json の文章だけ書き換えれば更新できる
-  fetch('content.json')
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById('message-date').textContent = data.message.date + ' 更新';
-      document.getElementById('message-body').textContent = data.message.body;
-    })
-    .catch(error => {
-      // content.json が見つからない場合（ファイルを直接ダブルクリックして開いた場合など）の代替表示
-      document.getElementById('message-date').textContent = '更新日未取得';
-      document.getElementById('message-body').textContent = 'メッセージを読み込めませんでした。content.json をご確認ください。';
-      console.error('content.json の読み込みに失敗しました:', error);
-    });
-</script>
 
 </body>
 </html>
