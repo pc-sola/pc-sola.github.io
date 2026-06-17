@@ -84,7 +84,17 @@
   }
 
   @media (max-width: 480px) {
-    .header-message { font-size: 26px; white-space: normal; width: 90%; text-align: center; }
+    .header-message { font-size: 20px; white-space: normal; width: 90%; text-align: center; }
+
+    /* スマートフォンでは、ロゴ(PCサロン・Sola)を、画面の、左上から、
+       水平方向の、中央に、移動させる。
+       left: 50% と、transform: translateX(-50%) を、組み合わせることで、
+       要素の「中心」を、画面の「中心」に、正確に、揃えられる
+       (振り返り26で、メッセージを、上下左右、中央に、配置した際と、同じ考え方)。 */
+    .header-inner {
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 
   /* ===== ヘッダー：太田市サイトの左上ロゴ部分に相当 =====
@@ -121,7 +131,6 @@
     width: 150px;
     height: 100px;
     border-radius: 12px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
