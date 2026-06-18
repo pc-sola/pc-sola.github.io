@@ -18,6 +18,13 @@
        <img src="images/book01.jpg"> のように、短いファイル名に書き換えてください。
        alt="..." の文章（画像が何を表すかの説明）は、SEOのためそのまま残すか、
        実際の内容に合わせて書き直してください。
+
+    4. ロゴ画像（images/pc-logo.png, images/mobile-logo.png）も、
+       同じ images フォルダに置いてください。
+       PC幅では header-inner の中の pc-logo.png（左上）が表示され、
+       480px以下のスマートフォン幅では、それが隠れて
+       mobile-logo.png（右下、header-message より一段小さいサイズ）に
+       自動で切り替わります。
   */
   :root {
     --color-text: #1A1A1A;
@@ -86,14 +93,14 @@
   @media (max-width: 480px) {
     .header-message { font-size: 20px; white-space: normal; width: 90%; text-align: center; }
 
-    /* スマートフォンでは、ロゴ(PCサロン・Sola)を、画面の、左上から、
-       水平方向の、中央に、移動させる。
-       left: 50% と、transform: translateX(-50%) を、組み合わせることで、
-       要素の「中心」を、画面の「中心」に、正確に、揃えられる
-       (振り返り26で、メッセージを、上下左右、中央に、配置した際と、同じ考え方)。 */
+    /* スマートフォンでは、PC用ロゴ(左上)を隠し、
+       モバイル用ロゴ(右下)だけを表示する。 */
     .header-inner {
-      left: 50%;
-      transform: translateX(-50%);
+      display: none;
+    }
+
+    .logo-mobile {
+      display: block;
     }
   }
 
@@ -123,34 +130,23 @@
     margin-right: calc(50% - 50vw);
   }
 
-  .header-inner p {
-    font-family: "游ゴシック", "Yu Gothic", "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", sans-serif;
-    color: #1A1A1A;
-    background: rgba(255,255,255,0.78);
-    border: 1px solid rgba(255,255,255,0.9);
-    width: 150px;
-    height: 100px;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  /* PC用ロゴ：header-innerの位置（左上）にそのまま画像として表示する */
+  .logo-pc {
+    display: block;
+    height: 56px;
+    width: auto;
   }
 
-  /* 1行目「PCサロン」：通常の太さ */
-  .header-line1 {
-    font-size: 19px;
-    font-weight: 400;
-    letter-spacing: 0.05em;
-  }
-
-  /* 2行目「Sola」：サイズを上げて主役として見せる（太字は使わない） */
-  .header-line2 {
-    font-size: 25px;
-    font-weight: 400;
-    letter-spacing: 0.03em;
-    margin-top: 2px;
+  /* モバイル用ロゴ：通常時（PC幅）は表示しない。
+     画面右下に、中央のメッセージ(header-message)より一段小さい
+     存在感で配置するため、絶対座標で右下を指定する。 */
+  .logo-mobile {
+    display: none;
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    height: 22px;
+    width: auto;
   }
 
   /* ===== NEWS：日付＋タイトルだけの、最小限の一覧 ===== */
@@ -284,9 +280,10 @@
 
   <header>
     <div class="header-inner">
-      <p><span class="header-line1">PCサロン</span><span class="header-line2">Sola</span></p>
+      <img src="images/pc-logo.png" alt="PCサロン Sola" class="logo-pc">
     </div>
     <p class="header-message">知を愛する大人来たれ</p>
+    <img src="images/mobile-logo.png" alt="知を愛する大人のための教室 PCサロン Sola 082-224-4733 Hiroshima-shi Naka-ku" class="logo-mobile">
   </header>
 
   <nav>
