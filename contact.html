@@ -32,7 +32,7 @@
 
   /* ===== サブページヘッダー（背景画像なし） ===== */
   header {
-    border-bottom: 2px solid var(--color-border);
+    border-bottom: 2px solid #2a6db5;
     padding: 20px 24px;
     width: 100vw;
     margin-left: calc(50% - 50vw);
@@ -47,6 +47,14 @@
     color: var(--color-text);
     text-decoration: none;
     display: inline-block;
+  }
+
+  .site-tagline {
+    font-family: var(--font-serif);
+    font-size: 12px;
+    color: var(--color-text-sub);
+    letter-spacing: 0.08em;
+    margin-top: 4px;
   }
 
   /* ===== ナビ ===== */
@@ -156,6 +164,7 @@
 
   <header>
     <a href="index.html" class="site-name">PCサロン Sola</a>
+    <p class="site-tagline">知を愛する大人のための教室</p>
   </header>
 
   <nav>
