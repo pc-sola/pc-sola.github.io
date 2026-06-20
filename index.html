@@ -98,17 +98,23 @@
     position: relative;
     height: 360px;
     border-bottom: 2px solid var(--color-border);
-    background-size: cover;
-    background-position: center;
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    transition: background-image 1s ease-in-out;
+    overflow: hidden;
   }
 
-  header.fade {
+  .slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
     opacity: 0;
-    transition: opacity 0.8s ease;
+    transition: opacity 1.2s ease-in-out;
+  }
+
+  .slide.active {
+    opacity: 1;
   }
 
   /* ===== NEWS：日付＋タイトルだけの、最小限の一覧 ===== */
@@ -243,6 +249,10 @@
 <div class="page">
 
   <header>
+    <div class="slide active" style="background-image:url('images/header-photo-web.jpg')"></div>
+    <div class="slide" style="background-image:url('images/header-photo-2.jpg')"></div>
+    <div class="slide" style="background-image:url('images/header-photo-3.png')"></div>
+    <div class="slide" style="background-image:url('images/header-photo-4.jpg')"></div>
     <div id="site-logo">
       <img src="images/pc-logo.png" alt="PCサロン Sola" id="logo-img">
     </div>
@@ -323,24 +333,14 @@
   updateLogo();
   window.addEventListener('resize', updateLogo);
 
-  // スライドショー
-  var slides = [
-    'images/header-photo-web.jpg',
-    'images/header-photo-2.jpg',
-    'images/header-photo-3.png',
-    'images/header-photo-4.jpg'
-  ];
+  // スライドショー（クロスフェード）
+  var slideEls = document.querySelectorAll('.slide');
   var current = 0;
-  var headerEl = document.querySelector('header');
-  headerEl.style.backgroundImage = "url('" + slides[0] + "')";
 
   setInterval(function() {
-    headerEl.classList.add('fade');
-    setTimeout(function() {
-      current = (current + 1) % slides.length;
-      headerEl.style.backgroundImage = "url('" + slides[current] + "')";
-      headerEl.classList.remove('fade');
-    }, 800);
+    slideEls[current].classList.remove('active');
+    current = (current + 1) % slideEls.length;
+    slideEls[current].classList.add('active');
   }, 5000);
 </script>
 
