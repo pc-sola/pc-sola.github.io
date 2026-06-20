@@ -252,7 +252,7 @@
     <div class="slide active" style="background-image:url('images/header-photo-web.jpg')"></div>
     <div class="slide" style="background-image:url('images/header-photo-2.jpg')"></div>
     <div class="slide" style="background-image:url('images/header-photo-3.png')"></div>
-    <div class="slide" style="background-image:url('images/header-photo-4.jpg')"></div>
+    <div class="slide" style="background-image:url('images/header-photo-4.jpg');background-position:calc(50% - 80px) center"></div>
     <div id="site-logo">
       <img src="images/pc-logo.png" alt="PCサロン Sola" id="logo-img">
     </div>
@@ -336,6 +336,17 @@
   // スライドショー（クロスフェード）
   var slideEls = document.querySelectorAll('.slide');
   var current = 0;
+
+  function adjustSlide4() {
+    var s = slideEls[3];
+    if (window.innerWidth <= 600) {
+      s.style.backgroundPosition = 'center center';
+    } else {
+      s.style.backgroundPosition = 'calc(50% - 80px) center';
+    }
+  }
+  adjustSlide4();
+  window.addEventListener('resize', adjustSlide4);
 
   setInterval(function() {
     var prev = current;
