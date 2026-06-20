@@ -98,12 +98,17 @@
     position: relative;
     height: 360px;
     border-bottom: 2px solid var(--color-border);
-    background-image: url('images/header-photo-web.jpg');
     background-size: cover;
     background-position: center;
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
+    transition: background-image 1s ease-in-out;
+  }
+
+  header.fade {
+    opacity: 0;
+    transition: opacity 0.8s ease;
   }
 
   /* ===== NEWS：日付＋タイトルだけの、最小限の一覧 ===== */
@@ -317,6 +322,26 @@
 
   updateLogo();
   window.addEventListener('resize', updateLogo);
+
+  // スライドショー
+  var slides = [
+    'images/header-photo-web.jpg',
+    'images/header-photo-2.jpg',
+    'images/header-photo-3.jpg',
+    'images/header-photo-4.jpg'
+  ];
+  var current = 0;
+  var headerEl = document.querySelector('header');
+  headerEl.style.backgroundImage = "url('" + slides[0] + "')";
+
+  setInterval(function() {
+    headerEl.classList.add('fade');
+    setTimeout(function() {
+      current = (current + 1) % slides.length;
+      headerEl.style.backgroundImage = "url('" + slides[current] + "')";
+      headerEl.classList.remove('fade');
+    }, 800);
+  }, 5000);
 </script>
 
 </body>
