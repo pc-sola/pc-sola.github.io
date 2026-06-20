@@ -104,17 +104,19 @@
     overflow: hidden;
   }
 
-  .slide {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 1.2s ease-in-out;
+  .slide-track {
+    display: flex;
+    width: 400%;
+    height: 100%;
+    transition: transform 0.7s ease-in-out;
   }
 
-  .slide.active {
-    opacity: 1;
+  .slide {
+    width: 25%;
+    height: 100%;
+    flex-shrink: 0;
+    background-size: cover;
+    background-position: center;
   }
 
   /* ===== NEWS：日付＋タイトルだけの、最小限の一覧 ===== */
@@ -272,10 +274,12 @@
 <div class="page">
 
   <header>
-    <div class="slide active" style="background-image:url('images/header-photo-web.jpg')"></div>
-    <div class="slide" style="background-image:url('images/header-photo-2.jpg')"></div>
-    <div class="slide" style="background-image:url('images/header-photo-3.png')"></div>
-    <div class="slide" style="background-image:url('images/header-photo-4.jpg');background-position:calc(50% - 50px) center;background-size:110%"></div>
+    <div class="slide-track" id="slide-track">
+      <div class="slide" style="background-image:url('images/header-photo-web.jpg')"></div>
+      <div class="slide" style="background-image:url('images/header-photo-2.jpg')"></div>
+      <div class="slide" style="background-image:url('images/header-photo-3.png')"></div>
+      <div class="slide" id="slide4" style="background-image:url('images/header-photo-4.jpg')"></div>
+    </div>
     <button class="slide-btn prev" id="btn-prev">&#8249;</button>
     <button class="slide-btn next" id="btn-next">&#8250;</button>
     <div id="site-logo">
@@ -358,13 +362,15 @@
   updateLogo();
   window.addEventListener('resize', updateLogo);
 
-  // スライドショー（クロスフェード）
-  var slideEls = document.querySelectorAll('.slide');
+  // スライドショー（スライド方式）
+  var track = document.getElementById('slide-track');
+  var total = 4;
   var current = 0;
   var timer;
+  var sliding = false;
 
   function adjustSlide4() {
-    var s = slideEls[3];
+    var s = document.getElementById('slide4');
     if (window.innerWidth <= 600) {
       s.style.backgroundPosition = 'center center';
       s.style.backgroundSize = 'cover';
@@ -377,12 +383,11 @@
   window.addEventListener('resize', adjustSlide4);
 
   function goTo(next) {
-    var prev = current;
-    current = (next + slideEls.length) % slideEls.length;
-    slideEls[current].classList.add('active');
-    setTimeout(function() {
-      slideEls[prev].classList.remove('active');
-    }, 1200);
+    if (sliding) return;
+    sliding = true;
+    current = (next + total) % total;
+    track.style.transform = 'translateX(-' + (current * 25) + '%)';
+    setTimeout(function() { sliding = false; }, 700);
   }
 
   function startTimer() {
