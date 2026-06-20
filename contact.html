@@ -30,53 +30,23 @@
     padding: 0 24px;
   }
 
-  /* ===== ヘッダー ===== */
+  /* ===== サブページヘッダー（背景画像なし） ===== */
   header {
-    position: relative;
-    height: 360px;
     border-bottom: 2px solid var(--color-border);
-    background-image: url('images/header-photo-web.jpg');
-    background-size: cover;
-    background-position: center;
+    padding: 20px 24px;
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
   }
 
-  #site-logo {
-    position: absolute;
-  }
-
-  #site-logo img {
-    display: block;
-  }
-
-  .header-message {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #FFFFFF;
-    font-family: var(--font-serif);
-    font-size: 40px;
-    letter-spacing: 0.12em;
-    text-shadow: 0 4px 20px rgba(0,0,0,0.7);
-    white-space: nowrap;
-    opacity: 0;
-    filter: blur(16px);
-    animation: fadeUpMessage 3.5s ease-out 0.3s forwards;
-  }
-
-  @keyframes fadeUpMessage {
-    to { opacity: 1; filter: blur(0px); }
-  }
-
-  @media (max-width: 768px) {
-    .header-message { font-size: 20px; white-space: normal; width: 90%; text-align: center; }
-  }
-
-  @media (max-width: 600px) {
-    header { height: 240px; }
+  .site-name {
+    font-family: "游ゴシック", "Yu Gothic", "ヒラギノ角ゴ ProN", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--color-text);
+    text-decoration: none;
+    display: inline-block;
   }
 
   /* ===== ナビ ===== */
@@ -101,7 +71,8 @@
   nav a.active { border-bottom: 1px solid var(--color-text); padding-bottom: 2px; }
 
   @media (max-width: 600px) {
-    nav { gap: 16px; padding: 16px 16px 0; }
+    nav { gap: 10px 16px; padding: 16px 16px 0; }
+    nav a { font-size: 13px; }
   }
 
   /* ===== ページタイトル ===== */
@@ -184,10 +155,7 @@
 <div class="page">
 
   <header>
-    <div id="site-logo">
-      <img src="images/pc-logo.png" alt="PCサロン Sola" id="logo-img">
-    </div>
-    <p class="header-message">知を愛する大人来たれ</p>
+    <a href="index.html" class="site-name">PCサロン Sola</a>
   </header>
 
   <nav>
