@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>声｜PCサロン Sola</title>
+<style>
+  :root {
+    --color-text: #1A1A1A;
+    --color-text-sub: #6B6B6B;
+    --color-border: #1A1A1A;
+    --color-border-light: #D8D8D8;
+    --font-serif: "游明朝", "Yu Mincho", "ヒラギノ明朝 ProN", serif;
+    --font-sans: "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    background: #FFFFFF;
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  header {
+    border-bottom: 2px solid var(--color-border);
+    padding: 20px 24px;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+
+  .site-name {
+    font-family: "游ゴシック", "Yu Gothic", "ヒラギノ角ゴ ProN", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--color-text);
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  nav {
+    padding: 18px 24px 0;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    font-family: "游ゴシック", "Yu Gothic", "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    letter-spacing: 0.05em;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  nav a:hover { color: var(--color-text-sub); }
+  nav a.active { border-bottom: 1px solid var(--color-text); padding-bottom: 2px; }
+
+  @media (max-width: 600px) {
+    nav { gap: 10px 16px; padding: 16px 16px 0; }
+    nav a { font-size: 13px; }
+  }
+
+  .page-title {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--color-border-light);
+    margin-bottom: 40px;
+  }
+
+  .page-title h1 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+
+  .content {
+    padding-bottom: 80px;
+  }
+
+  .voice {
+    padding: 36px 0;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .voice:first-child {
+    padding-top: 0;
+  }
+
+  .voice-text {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    line-height: 2;
+    margin-bottom: 16px;
+  }
+
+  .voice-attr {
+    font-size: 13px;
+    color: var(--color-text-sub);
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header>
+    <a href="index.html" class="site-name">PCサロン Sola</a>
+  </header>
+
+  <nav>
+    <a href="index.html">HOME</a>
+    <a href="learn.html">学べる事</a>
+    <a href="courses.html">受講システム</a>
+    <a href="voices.html" class="active">声</a>
+    <a href="access.html">アクセス</a>
+    <a href="contact.html">お問い合わせ</a>
+  </nav>
+
+  <div class="page-title">
+    <h1>声</h1>
+  </div>
+
+  <div class="content">
+
+    <div class="voice">
+      <p class="voice-text">「パソコンは難しいものだと思っていましたが、ここに来て少しずつ使えるようになりました。先生がいつも丁寧に教えてくださるので、安心して通えています。」</p>
+      <p class="voice-attr">70代・女性</p>
+    </div>
+
+    <div class="voice">
+      <p class="voice-text">「メールの使い方が分からなくて困っていましたが、今では孫とやり取りできるようになりました。通って本当によかったです。」</p>
+      <p class="voice-attr">75歳・男性</p>
+    </div>
+
+    <div class="voice">
+      <p class="voice-text">「同じことを何度聞いても嫌な顔ひとつしないので、気持ちよく通えています。」</p>
+      <p class="voice-attr">68歳・女性</p>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
